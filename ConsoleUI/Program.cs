@@ -27,9 +27,18 @@ namespace ConsoleUI
             //colorManager.Add(color1);
             //carmanager.Add(car1);
             //carmanager.Delete(car1);
-            foreach (var car in carmanager.GetCarDetails())
+            var result = carmanager.GetCarDetails();
+            if (result.Success == true)
             {
-                Console.WriteLine(car.CarName);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.CarName + " / " + car.BrandName);
+                }
+
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
             }
             Console.WriteLine("sasasas");
 
