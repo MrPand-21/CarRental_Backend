@@ -15,5 +15,25 @@ namespace Business.Constants
         public static string CarAdded = "Your Car Added to our db!";
         public static string CarNotAdded = "Your car's price must more than 0$ and Your car's description must be min. 2 letters!!!";
         public static string MaintenanceTime = "Our App/Program in the Maintance now...";
+
+        public static string CustomerAdded = "New Customer Added to our db <3";
+        public static string CustomerDeleted = "Good bye old Customer friend...";
+        public static string CustomerUpdated = "Customer updated!!!";
+        public static string CustomersListed = "You can see all of the Customers above";
+        public static string CustomerFound = "Yeah, intelligent Program Found the Customer you searched!";
+
+        public static string RentalAdded = "Thank you for choosing us!";
+        public static string RentalDeleted = "Okay, That's enough";
+        public static string RentalsListed = "You can see all Rentals above...";
+        public static string RentalFound = "Did you search this ?";
+        public static string RentalUpdated = "Woaw, new update to db...";
+
+        public static string UserDeleted = "Heey,Why?!!";
+        public static string UserAdded = "Hello, my dear friend";
+        public static string UserUpdated = "You are a new person now!";
+        public static string UsersListed = "Look at the above!";
+        public static string UserFound = "Here it is :))";
+
+        public static string ReturnDate { get; internal set; }
     }
 }

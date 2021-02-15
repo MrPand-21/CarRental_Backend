@@ -1,5 +1,8 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Abstract;
+using Core.Utilities.Concrete;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -9,29 +12,43 @@ namespace Business.Concrete
 {
     public class RentalManager : IRentalService
     {
-        public IResult Add(Rental car)
+        IRentalDal _rentalDal;
+
+        public RentalManager(IRentalDal productDal)
         {
-            throw new NotImplementedException();
+            _rentalDal = productDal;
+        }
+        public IResult Add(Rental rental)
+        {
+            var result = _rentalDal.GetAll(r => r.CarId == rental.CarId && r.ReturnDate != null);
+            if (result.Count > 0)
+            {
+                return new ErrorResult(Messages.ReturnDate);
+            }
+            _rentalDal.Add(rental);
+            return new SuccessResult(Messages.RentalAdded);
         }
 
-        public IResult Delete(Rental car)
+        public IResult Delete(Rental rental)
         {
-            throw new NotImplementedException();
+            _rentalDal.Delete(rental);
+            return new SuccessResult(Messages.RentalDeleted);
         }
 
         public IDataResult<List<Rental>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.RentalsListed);
         }
 
         public IDataResult<Rental> GetRentalById(int id)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.Id == id), Messages.RentalFound);
         }
 
-        public IResult Update(Rental car)
+        public IResult Update(Rental rental)
         {
-            throw new NotImplementedException();
+            _rentalDal.Update(rental);
+            return new SuccessResult(Messages.RentalUpdated);
         }
     }
 }
