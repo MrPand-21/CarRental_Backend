@@ -11,19 +11,19 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BrandsController : ControllerBase
+    public class RentalsController : ControllerBase
     {
-        IBrandService _brandService;
+        IRentalService _rentalService;
 
-        public BrandsController(IBrandService brandService)
+        public RentalsController(IRentalService rentalService)
         {
-            _brandService = brandService;
+            _rentalService = rentalService;
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Brand brand)
+        public IActionResult Add(Rental rental)
         {
-            var result = _brandService.Add(brand);
+            var result = _rentalService.Add(rental);
             if (result.Success)
             {
                 return Ok(result);
@@ -34,9 +34,9 @@ namespace WebAPI.Controllers
             }
         }
         [HttpPost("delete")]
-        public IActionResult Delete(Brand brand)
+        public IActionResult Delete(Rental rental)
         {
-            var result = _brandService.Delete(brand);
+            var result = _rentalService.Delete(rental);
             if (result.Success)
             {
                 return Ok(result);
@@ -47,9 +47,9 @@ namespace WebAPI.Controllers
             }
         }
         [HttpPost("update")]
-        public IActionResult Update(Brand brand)
+        public IActionResult Update(Rental rental)
         {
-            var result = _brandService.Update(brand);
+            var result = _rentalService.Update(rental);
             if (result.Success)
             {
                 return Ok(result);
@@ -65,7 +65,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _brandService.GetAll();
+            var result = _rentalService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -78,7 +78,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
-            var result = _brandService.GetBrandById(id);
+            var result = _rentalService.GetRentalById(id);
             if (result.Success)
             {
                 return Ok(result);

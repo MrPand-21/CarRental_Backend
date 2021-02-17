@@ -20,7 +20,7 @@ namespace ConsoleUI
                 Name = "Brand2"
             };
             Color color1 = new Color { Name = "Color2", Colorid = 1 };
-            Car  car1 = new Car { BrandId = 2, ColorId = 1, DailyPrice = 1221, Descriptio = "ssw", CarId = 1, ModelYear = 1122 };
+            Car  car1 = new Car { BrandId = 2, ColorId = 1, DailyPrice = 1221, Descriptio = "ssw", CarId = 1, ModelYear = "1122" };
 
 
             //brandManager.Add(brand2);

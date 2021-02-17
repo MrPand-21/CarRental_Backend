@@ -35,5 +35,15 @@ namespace Business.Constants
         public static string UserFound = "Here it is :))";
 
         public static string ReturnDate { get; internal set; }
+        public static string BrandFound { get; internal set; }
+        public static string BrandsListed { get; internal set; }
+        public static string ResultDeleted { get; internal set; }
+        public static string ResultAdded { get; internal set; }
+        public static string ResultUpdated { get; internal set; }
+        public static string ColorDeleted { get; internal set; }
+        public static string ColorsListed { get; internal set; }
+        public static string ColorAdded { get; internal set; }
+        public static string ColorFound { get; internal set; }
+        public static string ColorUpdated { get; internal set; }
     }
 }
