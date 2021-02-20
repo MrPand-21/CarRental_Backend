@@ -7,6 +7,8 @@ using Core.Utilities.Abstract;
 using Core.Utilities.Concrete;
 using Business.Constants;
 using Entities.DTOs;
+using Business.ValidationRules.FluentValidation;
+using FluentValidation;
 
 namespace Business.Concrete
 {
@@ -24,14 +26,15 @@ namespace Business.Concrete
 
         public IResult Add(Car car)
         {
-        
-            if (Validate(car))
+            var context = new ValidationContext<Car>(car);
+            CarValidator carValidator = new CarValidator();
+            var result = carValidator.Validate(context);
+            if (!result.IsValid)
             {
-                _carDal.Add(car);
-                return new SuccessResult(Messages.CarAdded);
+                throw new ValidationException(result.Errors);
             }
-            
-            return new ErrorResult(Messages.CarNotAdded);
+            _carDal.Add(car);
+            return new SuccessResult(Messages.CarAdded);  
         }
 
         public IResult Delete(Car car)
