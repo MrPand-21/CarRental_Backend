@@ -7,9 +7,13 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="9.5.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.11" />
+    <PackageReference Include="Castle.Core" Version="4.4.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Utilities\Interceptors\" />
+    <Folder Include="Aspects\" />
+    <Folder Include="Aspects\Autofac\" />
+    <Folder Include="Aspects\Autofac\Validation\" />
   </ItemGroup>
 </Project>
