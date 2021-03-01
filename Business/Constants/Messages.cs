@@ -45,5 +45,6 @@ namespace Business.Constants
         public static string ColorAdded { get; internal set; }
         public static string ColorFound { get; internal set; }
         public static string ColorUpdated { get; internal set; }
+        public static string CarImageAdded { get; internal set; }
     }
 }

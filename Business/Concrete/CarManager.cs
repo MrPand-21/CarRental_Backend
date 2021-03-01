@@ -10,6 +10,7 @@ using Entities.DTOs;
 using Business.ValidationRules.FluentValidation;
 using FluentValidation;
 using Core.CrossCuttingCorcerns.Validation.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 
 namespace Business.Concrete
 {
@@ -25,9 +26,10 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-            ValidationTool.Validate(new CarValidator(), car);
+            
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);  
         }
@@ -68,24 +70,12 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id), Messages.CarsListed); 
         }
-
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
             _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
-        }
-
-        private bool Validate(Car car)
-        {
-            if (car.Descriptio.Length >= 2 && car.DailyPrice > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        }     
 
     }
 }
