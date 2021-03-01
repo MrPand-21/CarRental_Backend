@@ -34,17 +34,26 @@ namespace Business.Constants
         public static string UsersListed = "Look at the above!";
         public static string UserFound = "Here it is :))";
 
-        public static string ReturnDate { get; internal set; }
-        public static string BrandFound { get; internal set; }
-        public static string BrandsListed { get; internal set; }
-        public static string ResultDeleted { get; internal set; }
-        public static string ResultAdded { get; internal set; }
-        public static string ResultUpdated { get; internal set; }
-        public static string ColorDeleted { get; internal set; }
-        public static string ColorsListed { get; internal set; }
-        public static string ColorAdded { get; internal set; }
-        public static string ColorFound { get; internal set; }
-        public static string ColorUpdated { get; internal set; }
-        public static string CarImageAdded { get; internal set; }
+        public static string ImageUpdated = "Image Updated!";
+        public static string ImageFound = "Image Found!";
+        public static string ImagesListed = "All Images are below...";
+        public static string ImageDeleted = "This image deleted forever :((";
+        public static string CarImageAdded = "Image added to db!!!";
+
+        public static string ReturnDate = "Return Date...";
+        public static string BrandFound = "Here is your brand you search";
+        public static string BrandsListed = "You can find all brands from list below";
+
+        public static string ResultDeleted = "You deleted the Result";
+        public static string ResultAdded = "You added new result <3";
+        public static string ResultUpdated = "Result updated...";
+
+        public static string ColorDeleted = "Goodbye, litte color...";
+        public static string ColorsListed = "Woaw, there are a lot of colors!";
+        public static string ColorAdded = "This looks nice!";
+        public static string ColorFound = "What a beatiful choice...";
+        public static string ColorUpdated = "This looks nicer?";
+
+        public static string LimitExceed { get; internal set; }
     }
 }
