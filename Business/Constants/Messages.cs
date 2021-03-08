@@ -1,6 +1,8 @@
-﻿using Entities.DTOs;
+﻿using Core.Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Business.Constants
 {
@@ -54,6 +56,14 @@ namespace Business.Constants
         public static string ColorFound = "What a beatiful choice...";
         public static string ColorUpdated = "This looks nicer?";
 
-        public static string LimitExceed { get; internal set; }
+        public static string LimitExceed = "Limit exceed!!!";
+        public static string AuthorizationDenied = "You have not a access to this area !!!";
+
+        public static string ClaimsListed = "Claims listed!!!";
+        public static string UserCreated = "User you want to add was added...";
+        public static string UserAlreadyExists = "Boom, user already exist. You can use login page...";
+        public static string PasswordIncorrect = "Password Incorrect. Are you sure that you wrote correctly?";
+
+        public static string TokenCreated { get; internal set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Business.ValidationRules.FluentValidation
         public UserValidator()
         {
             RuleFor(u => u.Email).EmailAddress();
-            RuleFor(u => u.Password).NotNull().MinimumLength(8).Must(IncludesNumber).WithMessage("Your password must includes numbers and its length must be higher than 8 letters!");
+            
         }
 
         private bool IncludesNumber(string arg)
