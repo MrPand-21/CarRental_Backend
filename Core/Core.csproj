@@ -11,6 +11,7 @@
     <PackageReference Include="Castle.Core" Version="4.4.1" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.8.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,5 +19,6 @@
     <Folder Include="Aspects\" />
     <Folder Include="Aspects\Autofac\" />
     <Folder Include="Aspects\Autofac\Validation\" />
+    <Folder Include="DependencyResolvers\" />
   </ItemGroup>
 </Project>
