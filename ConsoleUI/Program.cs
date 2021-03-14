@@ -27,6 +27,7 @@ namespace ConsoleUI
             //colorManager.Add(color1);
             //carmanager.Add(car1);
             //carmanager.Delete(car1);
+
             var result = carmanager.GetCarDetails();
             if (result.Success == true)
             {
@@ -40,7 +41,7 @@ namespace ConsoleUI
             {
                 Console.WriteLine(result.Message);
             }
-            Console.WriteLine("sasasas");
+           
 
 
         }

@@ -20,5 +20,10 @@
     <Folder Include="Aspects\Autofac\" />
     <Folder Include="Aspects\Autofac\Validation\" />
     <Folder Include="DependencyResolvers\" />
+    <Folder Include="CrossCuttingCorcerns\Caching\" />
+    <Folder Include="CrossCuttingCorcerns\Caching\Microsoft\" />
+    <Folder Include="Aspects\Autofac\Caching\" />
+    <Folder Include="Aspects\Autofac\Transaction\" />
+    <Folder Include="Aspects\Autofac\Performance\" />
   </ItemGroup>
 </Project>

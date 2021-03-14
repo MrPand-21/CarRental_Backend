@@ -2,6 +2,9 @@
 using Core.Utilities.IoC;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http;
+using Core.CrossCuttingCorcerns.Caching;
+using Core.CrossCuttingCorcerns.Caching.Microsoft;
+using System.Diagnostics;
 
 namespace Core.DependencyResolvers
 {
@@ -9,7 +12,10 @@ namespace Core.DependencyResolvers
     {
         public void Load(IServiceCollection serviceCollection)
         {
+            serviceCollection.AddMemoryCache();
             serviceCollection.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            serviceCollection.AddSingleton<ICacheService, MemoryCacheManager>();
+            serviceCollection.AddSingleton<Stopwatch>();
         }
     }
 }
