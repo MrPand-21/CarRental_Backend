@@ -14,6 +14,7 @@ using Core.Aspects.Autofac.Validation;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Performance;
+using Business.BusinessAspects.Autofac;
 
 namespace Business.Concrete
 {
@@ -51,6 +52,7 @@ namespace Business.Concrete
 
         [CacheAspect(duration:80)]
         [PerformanceAspect(interval:2)]
+        [SecuredOperation("Cars.List, Admin")]
         public IDataResult<List<Car>> GetAll()
         {
             _carDal.GetAll();
