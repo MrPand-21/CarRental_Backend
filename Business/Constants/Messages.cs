@@ -65,5 +65,6 @@ namespace Business.Constants
         public static string PasswordIncorrect = "Password Incorrect. Are you sure that you wrote correctly?";
 
         public static string TokenCreated { get; internal set; }
+        public static string CarDetailFound { get; internal set; }
     }
 }

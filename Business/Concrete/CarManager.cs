@@ -64,6 +64,12 @@ namespace Business.Concrete
             return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == id), Messages.CarFound);
         }
 
+        [CacheAspect(duration: 10)]
+        public IDataResult<CarDetailDto> GetCarDetail(int carId)
+        {
+            return new SuccessDataResult<CarDetailDto>(_carDal.GetCarDetail(carId), Messages.CarDetailFound);
+        }
+
         [CacheAspect(duration:10)]
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
