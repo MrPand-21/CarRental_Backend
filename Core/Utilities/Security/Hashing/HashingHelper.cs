@@ -21,7 +21,7 @@ namespace Core.Utilities.Security.Hashing
         {
             using (var hmac = new HMACSHA512(encryptedPassword.PasswordSalt))
             {
-                var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+                byte[] computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
                 for (int i = 0; i < computedHash.Length; i++)
                 {
                     if (computedHash[i] != encryptedPassword.PasswordHash[i])
