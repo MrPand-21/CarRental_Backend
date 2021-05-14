@@ -64,7 +64,12 @@ namespace Business.Concrete
         [PerformanceAspect(interval: 2)]
         public IDataResult<User> GetUserByMail(string email)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email), Messages.UserFound);
+            var result = _userDal.Get(u => u.Email == email);
+            if (result == null)
+            {
+                return null;
+            }
+            return new SuccessDataResult<User>(result, Messages.UserFound);
         }
 
         [ValidationAspect(typeof(UserValidator))]

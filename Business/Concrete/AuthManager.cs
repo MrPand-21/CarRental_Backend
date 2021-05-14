@@ -35,7 +35,7 @@ namespace Business.Concrete
             var userToCheck = _userService.GetUserByMail(userForLoginDto.Email);
             if (userToCheck == null)
             {
-                return new ErrorDataResult<User>(userToCheck.Message);
+                return new ErrorDataResult<User>(Messages.UserNotFound);
             }
             Password password = new Password { PasswordHash = userToCheck.Data.PasswordHash, PasswordSalt = userToCheck.Data.PasswordSalt };
             var result = HashingHelper.VerifyPassword(userForLoginDto.Password, password);

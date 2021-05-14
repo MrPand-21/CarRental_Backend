@@ -64,7 +64,10 @@ namespace Business.Constants
         public static string UserAlreadyExists = "Boom, user already exist. You can use login page...";
         public static string PasswordIncorrect = "Password Incorrect. Are you sure that you wrote correctly?";
 
-        public static string TokenCreated { get; internal set; }
-        public static string CarDetailFound { get; internal set; }
+        public static string TokenCreated = "Token Created.";
+        public static string CarDetailFound = "Car detail not found.";
+
+        public static string UserNotFound = "User not found.";
+
     }
 }
