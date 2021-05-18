@@ -19,7 +19,7 @@ namespace Core.Utilities.Helper.FileHelper
 
             public static string Add(IFormFile file)
             {
-                string path = Environment.CurrentDirectory + @"\wwwroot";
+                string path = Environment.CurrentDirectory + @"\Media\wwwroot";
                 var sourcePath = Path.GetTempFileName();
                 if (file.Length > 0)
                 {
@@ -34,7 +34,7 @@ namespace Core.Utilities.Helper.FileHelper
             }
             public static IResult Delete(string path)
             {
-                string path2 = Environment.CurrentDirectory + @"\wwwroot";
+                string path2 = Environment.CurrentDirectory + @"\Media\wwwroot";
                 path = path.Replace("/", "\\");
                 try
                 {
@@ -48,7 +48,7 @@ namespace Core.Utilities.Helper.FileHelper
             }
             public static string Update(string sourcePath, IFormFile file)
             {
-                string path = Environment.CurrentDirectory + @"\wwwroot";
+                string path = Environment.CurrentDirectory + @"\Media\wwwroot";
                 var result = newPath(file);
                 if (sourcePath.Length > 0)
                 {
