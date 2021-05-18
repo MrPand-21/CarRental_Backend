@@ -14,58 +14,57 @@ namespace Core.Utilities.Helper.FileHelper
 
     namespace Core.Utilities.Helpers
     {
-        public class FileHelper
+        public class FileUpload : IFileHelper
         {
-            public static IResult Add(string filePath, IFormFile file)
+
+            public IResult Delete(string filePath)
             {
-                var sourcepath = Path.GetTempFileName();
-                if (file.Length > 0)
-                {
-                    using (var stream = new FileStream(sourcepath, FileMode.Create))
-                    {
-                        file.CopyTo(stream);
-                    }
-                }
-
-                File.Move(sourcepath, filePath);
-
                 if (!File.Exists(filePath))
                 {
                     return new ErrorResult();
-                }
-                return new SuccessResult();
-            }
-
-            public static IResult Delete(string filePath)
-            {
-                if (!File.Exists(filePath))
-                {
-                    return new ErrorResult("Dosya Bulunamadı.");
                 }
                 File.Delete(filePath);
                 return new SuccessResult();
             }
 
-            public static string GenerateGUIDFileName(IFormFile file, int length)
+            public IResult Update(IFormFile file, string original, string root)
             {
-                return Guid.NewGuid().ToString().Substring(0, length) + new FileInfo(file.FileName).Extension;
-            }
-
-            public static IResult CheckFileType(IFormFile file, string[] extensions)
-            {
-                var extension = new FileInfo(file.FileName).Extension;
-                foreach (var ext in extensions)
+                if (!File.Exists(original))
                 {
-                    if (ext == extension)
-                    {
-                        return new SuccessResult();
-                    }
+                    return new ErrorResult();
                 }
-                return new ErrorResult($"Desteklenmeyen Dosya Formatı: {extension}");
+                File.Delete(original);
+                return Upload(file, root);
             }
 
+            public IResult Upload(IFormFile file, string path)
+            {
+                try
+                {
+                    if (!Directory.Exists(path))
+                        Directory.CreateDirectory(path);
 
+
+                    var extension = Path.GetExtension(file.FileName);
+                    var guid = Guid.NewGuid().ToString() + extension;
+                    var fileName = Path.Combine(path + guid);
+
+                    if (file.FileName == null) return new ErrorResult("No file detected");
+
+                    using var stream = new FileStream(file.FileName, FileMode.Create);
+
+                    file.CopyTo(stream);
+                    stream.Flush();
+                    stream.Close();
+                    File.Copy(file.FileName, fileName);
+                    File.Delete(stream.Name);
+                    return new SuccessResult(fileName);
+                }
+                catch (Exception e)
+                {
+                    return new ErrorResult(e.Message);
+                }
+            }
         }
-
     }
 }

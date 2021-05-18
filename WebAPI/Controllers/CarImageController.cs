@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Helper.FileHelper.Core.Utilities.Helpers;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,9 +16,14 @@ namespace WebAPI.Controllers
     public class CarImageController : ControllerBase
     {
         ICarImageService _carImageService;
-        public CarImageController(ICarImageService carImageService)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IFileHelper _file;
+
+        public CarImageController(ICarImageService carImageService, IFileHelper file, IWebHostEnvironment webHostEnvironment)
         {
             _carImageService = carImageService;
+            _carImageService = carImageService;
+            _file = file;
         }
         [HttpGet("getall")]
         public IActionResult GetAll()
@@ -41,14 +48,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(CarImage carImage)
+        public IActionResult Update(IFormFile file, CarImage carImage)
         {
+            var imageResult = _file.Update(file, carImage.ImagePath, _webHostEnvironment.WebRootPath + "\\uploads\\");
+            if (!imageResult.Success) return BadRequest(imageResult);
+            carImage.ImagePath = imageResult.Message;
             var result = _carImageService.Update(carImage);
-            if (result.Success)
-            {
-                return Ok();
-            }
-            return BadRequest();
+            if (result.Success) return Ok(result);
+            return BadRequest(result);
         }
 
         [HttpPost("delete")]
@@ -65,12 +72,12 @@ namespace WebAPI.Controllers
         [HttpPost("add")]
         public IActionResult Add( [FromForm] CarImage carImage, [FromForm] IFormFile file)
         {
-            var result = _carImageService.Add(file, carImage);
-            if (result.Success)
-            {
-                return Ok();
-            }
-            return BadRequest();
+            var imageResult = _file.Upload(file, _webHostEnvironment.WebRootPath + "\\uploads\\");
+            if (!imageResult.Success) return BadRequest(imageResult.Message);
+            carImage.ImagePath = imageResult.Message;
+            var result = _carImageService.Add(carImage);
+            if (result.Success) return Ok(result);
+            return BadRequest(result);
         }
     }
 }

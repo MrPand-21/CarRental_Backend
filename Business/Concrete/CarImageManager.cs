@@ -20,8 +20,6 @@ namespace Business.Concrete
     public class CarImageManager:ICarImageService
     {
         ICarImageDal _carImageDal;
-        string imagePath = @"..\WebAPI\Images\";
-        string[] imageExtensions = { ".jpg", ".jpeg", ".png", ".bmp" };
 
         public CarImageManager(ICarImageDal carImageDal)
         {
@@ -31,15 +29,11 @@ namespace Business.Concrete
         [CacheRemoveAspect("ICarImageService.Get")]
         [TransactionScopeAspect]
         [PerformanceAspect(interval: 22)]
-        public IResult Add(IFormFile file, CarImage carImage)
+        public IResult Add(CarImage carImage)
         {
-            var result= BusinessRules.Run(CheckImageLimitExceed(carImage));
-            if (result != null)
-            {
-                return result;
-            }
-            carImage.ImagePath = imagePath + FileHelper.GenerateGUIDFileName(file, 20);
-            carImage.Date = DateTime.Now;
+            BusinessRules.Run(CheckImageLimitExceed(carImage));
+
+            carImage.Date = DateTime.Now.Date;
             _carImageDal.Add(carImage);
             return new SuccessResult(Messages.CarImageAdded);
         }
@@ -61,6 +55,12 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == id),Messages.ImageFound);
         }
+
+        public IDataResult<List<CarImage>> GetCarImageByCarId(int carId)
+        {
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(x => x.CarId == carId), Messages.ImagesListed);
+        }
+
         [ValidationAspect(typeof(CarImageValidator))]
         [CacheRemoveAspect("ICarImageService.Get")]
         [TransactionScopeAspect]
@@ -80,10 +80,9 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.LimitExceed);
             }
-            else
-            {
-                return new SuccessResult();
-            }
+            
+            return new SuccessResult();
+            
         }
     }
 }

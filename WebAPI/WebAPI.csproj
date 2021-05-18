@@ -16,6 +16,8 @@
 
 
   <ItemGroup>
-    <Folder Include="Images\" />
+    <Folder Include="Uploads\" />
+    <Folder Include="Uploads\wwwroot\" />
+    <Folder Include="Uploads\wwwroot\images\" />
   </ItemGroup>
 </Project>
