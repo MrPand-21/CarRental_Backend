@@ -10,9 +10,6 @@ namespace Business.ValidationRules.FluentValidation
     {
         public CarImageValidator()
         {
-            RuleFor(c => c.Date).NotNull().WithMessage("It can't be null");
-            RuleFor(c => c.Id).GreaterThanOrEqualTo(1).NotNull();
-            RuleFor(c => c.Date).NotEmpty();
             RuleFor(c => c.CarId).NotEmpty();
         }
     }
